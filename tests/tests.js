@@ -21,9 +21,23 @@ tests.push({
         var roast = new Roast();
 
         // assert
-        return assert(0, roast.tests.length, "A test exists when it shouldn't.");
+        return assert(0, roast.tests.length, "A test exists when it shouldn't");
     }
-})
+});
+
+tests.push({
+    description: "Can inject tests",
+    test: function canInjectTest() {
+        // arrange
+        var tests = ["test1", "test2"];
+
+        // act
+        var roast = new Roast(tests);
+
+        // assert
+        return assert(2, roast.tests.length, "Could not inject tests");
+    }
+});
 
 tests.push({
     description: "Can add a test",
@@ -35,9 +49,23 @@ tests.push({
         roast.it('hello', function(){return;});
 
         // assert
-        return assert(1, roast.tests.length, "Test wasn't added.");
+        return assert(1, roast.tests.length, "Test wasn't added");
     }
-})
+});
+
+tests.push({
+    description: "can run tests",
+    test: function canRunTests() {
+        // arrange
+        var roast = new Roast([{description:"description",testFunction:function(){return true;}}]);
+
+        // act
+        var result = roast.run();
+
+        // assert
+        return assert(false, roast.hasFailingTests, "Test didn't run");
+    }
+});
 
 // run tests
 ////////////

@@ -1,6 +1,9 @@
-var Roast = function Roast() {
+var Roast = function Roast(tests) {
     this.tests = [];
     this.hasFailingTests = false;
+    if (Array.isArray(tests)) {
+        this.tests = tests;
+    }
 };
 
 Roast.prototype.it = function it(description, testFunction) {
