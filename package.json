@@ -1,0 +1,25 @@
+{
+  "name": "roast.it",
+  "version": "1.0.0",
+  "description": "A simple Javascipt testing framework designed for providing a fast feedback loop with minimal fuss.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quakkels/roast.it.git"
+  },
+  "keywords": [
+    "unit",
+    "test",
+    "tdd",
+    "testing"
+  ],
+  "author": "Brandon Quakkelaar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quakkels/roast.it/issues"
+  },
+  "homepage": "https://github.com/quakkels/roast.it#readme"
+}
