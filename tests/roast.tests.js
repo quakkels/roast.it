@@ -1,6 +1,7 @@
 var roast = require("../roast.it.js");
 
 var TestRoast = require('../roast.js');
+var consoleFake = require('./fakes/consoleFake.js');
 
 roast.it(
     "Has no tests to start",
@@ -31,7 +32,7 @@ roast.it(
     "Can run tests",
     function canRunTests() {
         // arrange
-        var testRoast = new TestRoast();
+        var testRoast = new TestRoast(consoleFake);
         testRoast.tests = [{
             description:"description",
             testFunction:function(){return true;}
