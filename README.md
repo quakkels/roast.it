@@ -6,7 +6,7 @@ feedback loop with minimal fuss.
 
 Tests are added using the `roast.it()` function.
 
-### my.tests.js:
+### tests/my.tests.js:
 ```
 var roast = require('../roast.it.js');
 
@@ -22,7 +22,7 @@ Roast.it(
 
 Then, create a Javascript file that will run all your tests.
 
-### tests.js:
+### tests/tests.js:
 ```
 var roast = require('../roast.it.js');
 
@@ -31,4 +31,24 @@ require('./my.tests.js');
 
 roast.run();
 roast.exit();
+```
+
+Add this `tests.js` file to your `package.json`'s `scripts` section.
+
+### package.json:
+```
+  "scripts": {
+    "test": "node tests/tests.js"
+  },
+```
+
+Then test using NPM:
+```
+> npm test
+```
+Which shows this in the terminal:
+```
+> node tests/tests.js                                                                                                                                                  
+                                                                                                                                                                       
+Roasted 1 tests.
 ```
