@@ -15,7 +15,7 @@ Tests are added using the `roast.it()` function.
 ```
 var roast = require('roast.it');
 
-Roast.it(
+roast.it(
     "Description of the test",
     function testFunction() {
         // your testing code
