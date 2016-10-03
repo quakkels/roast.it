@@ -2,13 +2,18 @@
 A simple Javascript unit testing library designed for providing a fast 
 feedback loop with minimal fuss.
 
-## Making a test
+
+## Install
+
+`npm install roast.it`
+
+## Make a test
 
 Tests are added using the `roast.it()` function.
 
 ### tests/my.tests.js:
 ```
-var roast = require('../roast.it.js');
+var roast = require('roast.it');
 
 Roast.it(
     "Description of the test",
@@ -24,7 +29,7 @@ Then, create a Javascript file that will run all your tests.
 
 ### tests/tests.js:
 ```
-var roast = require('../roast.it.js');
+var roast = require('roast.it');
 
 // include all test files
 require('./my.tests.js');
