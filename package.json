@@ -1,8 +1,8 @@
 {
   "name": "roast.it",
-  "version": "1.0.1",
-  "description": "A simple Javascipt testing framework designed for providing a fast feedback loop with minimal fuss.",
-  "main": "index.js",
+  "version": "1.0.2",
+  "description": "A simple Javascript testing framework designed for providing a fast feedback loop with minimal fuss.",
+  "main": "roast.it.js",
   "scripts": {
     "test": "node tests/tests.js"
   },
