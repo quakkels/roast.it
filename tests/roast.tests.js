@@ -1,3 +1,4 @@
+"use strict";
 var roast = require("../roast.it.js");
 
 var TestRoast = require('../roast.js');

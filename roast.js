@@ -1,4 +1,5 @@
-var Roast = function Roast(consoleObject) {
+"use strict";
+function Roast(consoleObject) {
     this.tests = [];
     this.hasFailingTests = false;
     this.console = consoleObject || console;
