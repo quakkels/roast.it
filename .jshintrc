@@ -11,6 +11,5 @@
   "maxcomplexity": 15,
   "nonew": true,
   "unused": true,
-  "node": true,
-  "browser": true
+  "node": true
 }
