@@ -5,7 +5,7 @@ feedback loop with minimal fuss.
 
 ## Install
 
-`npm install roast.it`
+`npm install roast.it --save`
 
 ## Make a test
 
