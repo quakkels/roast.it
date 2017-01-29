@@ -1,3 +1,6 @@
-"use strict";
 var Roast = require("./roast.js");
-module.exports = new Roast();
+
+var TeamcityReporter = require('./teamcityReporter');
+var teamcity = new TeamcityReporter(console, process.argv);
+
+module.exports = new Roast(console, teamcity);
