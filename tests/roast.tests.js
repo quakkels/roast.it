@@ -47,7 +47,7 @@ roast.it(
 
 roast.it(
     "Can fail tests",
-    function canRunTests() {
+    function canFailTests() {
         // arrange
         var consoleFake = new ConsoleFake();
         var testRoast = new TestRoast(consoleFake, new TeamcityReporterFake());
@@ -76,6 +76,64 @@ roast.it(
 
         // assert
         return true === testRoast.hasFailingTests && consoleFake.hasCalledErrorWith.indexOf('Description') > 0;
+    }
+);
+
+roast.it(
+    'Report the test count', function reportTestCount() {
+        // arrange
+        var testRoast = new TestRoast(new ConsoleFake(), new TeamcityReporterFake());
+        testRoast.tests = getRoastFakeTests();
+
+        // act
+        testRoast.run();
+
+        // assert
+        return testRoast.testedCount === 1;
+    }
+);
+
+roast.it(
+    'Report the passed test count', function reportPassedCount() {
+        // arrange
+        var testRoast = new TestRoast(new ConsoleFake(), new TeamcityReporterFake());
+        testRoast.tests = getRoastFakeTests();
+
+        // act
+        testRoast.run();
+
+        // assert
+        return testRoast.testedPassCount === 1;
+    }
+);
+
+roast.it(
+    'Report the failed test count', function reportFailedCount() {
+        // arrange
+        var testRoast = new TestRoast(new ConsoleFake(), new TeamcityReporterFake());
+        testRoast.tests = getRoastFakeTests();
+        testRoast.tests[0].testFunction = function failTest() { return false; };
+
+        // act
+        testRoast.run();
+
+        // assert
+        return testRoast.testedFailCount === 1;
+    }
+);
+
+roast.it(
+    'Report time duration for tests', function reportTimeForTests() {
+        // arrange
+        var consoleFake = new ConsoleFake();
+        var testRoast = new TestRoast(consoleFake, new TeamcityReporterFake());
+        testRoast.tests = getRoastFakeTests();
+
+        // act
+        testRoast.run();
+
+        // assert
+        return testRoast.testedStartTime !== null && console.calledLogWith !== null;
     }
 );
 

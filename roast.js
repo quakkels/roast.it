@@ -2,6 +2,11 @@ var Roast = function Roast(consoleObject, teamcityReporter) {
     this.tests = [];
     this.hasFailingTests = false;
 
+    this.testedCount = 0;
+    this.testedPassCount = 0;
+    this.testedFailCount = 0;
+    this.testedStartTime = Date.now();
+
     this.console = consoleObject;
     this.teamcityReporter = teamcityReporter;
 };
@@ -14,7 +19,6 @@ Roast.prototype.it = function it(description, testFunction) {
 };
 
 Roast.prototype.run = function run() {
-    var testedCount = 0;
     this.tests.forEach(function runTest(test) {
         if (this.teamcityReporter.isEnabled()) {
             this.teamcityReporter.reportStartTest(test.description);
@@ -31,17 +35,22 @@ Roast.prototype.run = function run() {
         }
 
         if (result !== true) {
-            this.hasFailingTests = !result;
+            this.hasFailingTests = true;
+            this.testedFailCount++;
+        } else {
+            this.testedPassCount++;
         }
 
         if (this.teamcityReporter.isEnabled() === true) {
             this.teamcityReporter.reportStopTest(test.description);
         }
 
-        testedCount++;
+        this.testedCount++;
     }, this);
 
-    this.console.log("Roasted " + testedCount + " tests.");
+    this.console.log("Roasted " + this.testedCount + " tests.");
+    this.console.log("SUMMARY Total: " + this.testedCount + ", Passed: " + this.testedPassCount +
+        ", Failed: " + this.testedFailCount + ", Time: " + (Date.now() - this.testedStartTime) / 1000 + "s");
 };
 
 Roast.prototype.exit = function exit() {
