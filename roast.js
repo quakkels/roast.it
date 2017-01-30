@@ -8,7 +8,12 @@ var Roast = function Roast(consoleObject, teamcityReporter) {
     this.testedStartTime = Date.now();
 
     this.console = consoleObject;
-    this.teamcityReporter = teamcityReporter;
+
+    if (teamcityReporter.isEnabled() === true) {
+        this.reportStartTest = teamcityReporter.reportStartTest.bind(teamcityReporter);
+        this.reportFailTest = teamcityReporter.reportFailTest.bind(teamcityReporter);
+        this.reportStopTest = teamcityReporter.reportStopTest.bind(teamcityReporter);
+    }
 };
 
 Roast.prototype.it = function it(description, testFunction) {
@@ -20,30 +25,20 @@ Roast.prototype.it = function it(description, testFunction) {
 
 Roast.prototype.run = function run() {
     this.tests.forEach(function runTest(test) {
-        if (this.teamcityReporter.isEnabled()) {
-            this.teamcityReporter.reportStartTest(test.description);
-        }
+        this.reportStartTest(test.description);
 
         var result = test.testFunction();
-
-        if (result !== true && this.teamcityReporter.isEnabled() === true) {
-            this.teamcityReporter.reportFailTest(test.description);
-        }
-
-        if (result !== true && this.teamcityReporter.isEnabled() !== true) {
-            this.console.error("Failed: [" + test.description + "]");
-        }
 
         if (result !== true) {
             this.hasFailingTests = true;
             this.testedFailCount++;
+
+            this.reportFailTest(test.description);
         } else {
             this.testedPassCount++;
         }
 
-        if (this.teamcityReporter.isEnabled() === true) {
-            this.teamcityReporter.reportStopTest(test.description);
-        }
+        this.reportStopTest(test.description);
 
         this.testedCount++;
     }, this);
@@ -59,6 +54,14 @@ Roast.prototype.exit = function exit() {
     }
 
     process.exit(0);
+};
+
+Roast.prototype.reportStartTest = function reportStartTest() {};
+
+Roast.prototype.reportStopTest = function reportStopTest() {};
+
+Roast.prototype.reportFailTest = function reportFailTest(description) {
+    this.console.error("Failed: [" + description + "]");
 };
 
 module.exports = Roast;

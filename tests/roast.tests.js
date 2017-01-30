@@ -9,7 +9,7 @@ roast.it(
     "Has no tests to start",
     function canAddATest() {
         // arrange
-        var testRoast = new TestRoast();
+        var testRoast = new TestRoast(null, new TeamcityReporterFake());
 
         // assert
         return 0 === testRoast.tests.length;
@@ -20,7 +20,7 @@ roast.it(
     "Can add a test",
     function canAddATest() {
         // arrange
-        var testRoast = new TestRoast();
+        var testRoast = new TestRoast(null, new TeamcityReporterFake());
 
         // act
         testRoast.it('hello', function test() { return; });
