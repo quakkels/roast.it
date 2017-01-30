@@ -1,3 +1,4 @@
+"use strict";
 var Roast = require("./roast.js");
 
 var TeamcityReporter = require('./teamcityReporter');
